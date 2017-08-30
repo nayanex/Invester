@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="itauInsightsApp">
+
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Itaú Insights</title>
+        <!-- Bootstrap -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <!--navigation bar elements to collapse for shorter screens, to be replaced by a toggle button-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" href="index.html"><img src="images/nike-logo.png" width="100%"></a>-->
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html">NOTÍCIAS</a></li>
+                    <li><a href="index.html">INVESTIMENTOS</a></li>
+                    <li><a href="index.html">GRÁFICOS</a></li>
+                    <li><a href="index.html">AÇÕES</a></li>
+                    <!--<li><a  class="navbar-brand" href="index.html"><img src="images/cart.png" width=12%></a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>  
+
+    <header class="jumbotron">
+        <!-- Main component for a primary marketing message or call to action -->
+    </header>
+
+    <div class="container" ng-controller="myController as myCtrl">
+        <div class="row row-content">
+            <table border="0">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg" ng-click="callApi()">
+                            Indicadores Econômicos
+                        </button>
+                    </td>
+                    <div ng-show="erroApi" class="alert alert-danger">
+                        <strong>Error:</strong> Problemas na comunicação com a API
+                    </div>
+                </tr>
+            </table>
+            <table class="table table-striped" style="background-color:white">
+                <thead>
+                    <tr>
+                        <th>indicador</th>
+                        <th width="200">Data</th>
+                        <th width="200">Rentabilidade Mensal</th>
+                        <th>Rentabilidade Anual</th>
+                        <th>Rentabilidade Últimos 12 meses</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="i in myIndexes.data.data">
+                    <tr>
+                        <td>{{i.nome_indicador}}</td>
+                        <td>{{i.data_indicador | date}}</td>
+                        <td align="center">{{i.rentabilidade.mes}}</td>
+                        <td align="center">{{i.rentabilidade.ano}}</td>
+                        <td align="center">{{i.rentabilidade['12_meses']}}%</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row row-footer">
+                <div id="img-bkg-footer">
+                    <p class="slogan-footer">JUST DO IT.</p>
+                    <input type="button" class="btn-dark" value="TODOS OS PRODUTOS" />
+                </div>
+                <p class="copyright-info">Nike Copyright 2017 - all rights reserved</p>
+            </div>
+        </div>
+    </footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+
+
+</html>
